@@ -1,65 +1,69 @@
-function getComputerChoice() {
-    const n = Math.random();
-
-    if (n < 0.33) return "PIEDRA";
-    else if (n >= 0.33 && n < 0.66) return "PAPEL";
-    else return "TIJERA";
-}
-
-function getHumanChoice() {
-    let m;
-
-    do {
-        opcion = prompt("Ingrese su opción (piedra, papel, tijera): ");
-        m = opcion.trim().toUpperCase();
-    } while (!(["PIEDRA", "PAPEL", "TIJERA"].includes(m)))
-
-    return m;
-}
-
-function playRound(humanChoice, computerChoice) {
-    console.log(`   Opciones ingresadas: 
-                    - Jugador:      ${humanChoice}
-                    - Computadora   ${computerChoice}`);
-
-
-    let ganoHumano = false;
-    let empate = false;
-
-    if (humanChoice == computerChoice) empate = true;
-    else if (humanChoice == "PIEDRA") computerChoice == "PAPEL" ? ganoHumano = false : ganoHumano = true;
-    else if (humanChoice == "PAPEL") computerChoice == "TIJERA" ? ganoHumano = false : ganoHumano = true;
-    else if (humanChoice == "TIJERA") computerChoice == "PIEDRA" ? ganoHumano = false : ganoHumano = true;
-
-    if (empate) console.log("Empate!");
-    else {
-        if (ganoHumano) {
-            humanScore++;
-            console.log(`   Ganó Humano!
-                            Puntaje actualizado: 
-                                - Jugador:      ${humanScore}
-                                - Computadora   ${computerScore}`);
-        }
-        else {
-            computerScore++;
-            console.log(`   Ganó Computadora!
-                            Puntaje actualizado: 
-                                - Jugador:      ${humanScore}
-                                - Computadora   ${computerScore}`);
-        }
-    }
-}
-
-function playGame() {
-
-    for (let i = 0; i<5; i ++) {
-        const x = getHumanChoice();
-        const y = getComputerChoice();
-        playRound(x, y);
-    }
-}
-
 let humanScore = 0;
 let computerScore = 0;
+let gameOver = false;
 
-playGame();
+const btnPiedra = document.getElementById("piedra");
+const btnPapel = document.getElementById("papel");
+const btnTijera = document.getElementById("tijera");
+
+const scoreEl = document.getElementById("score");
+const historialEl = document.getElementById("historial");
+const ganadorEl = document.getElementById("ganador");
+
+function getComputerChoice() {
+    const n = Math.random();
+    if (n < 0.33) return "PIEDRA";
+    if (n < 0.66) return "PAPEL";
+    return "TIJERA";
+}
+
+function actPuntos() {
+    scoreEl.textContent = `Jugador: ${humanScore} | Computadora: ${computerScore}`;
+}
+
+function agregarHistorial(texto) {
+    const li = document.createElement("li");
+    li.textContent = texto;
+    historialEl.appendChild(li);
+}
+
+function ganador() {
+    if (humanScore >= 5 || computerScore >= 5) {
+        gameOver = true;
+
+        let textoGanador = "";
+        if (humanScore > computerScore) textoGanador = "Ganaste la partida!";
+        else textoGanador = "La computadora ganó la partida!";
+
+        ganadorEl.textContent = textoGanador;
+    }
+}
+
+function playRound(humanChoice) {
+    if (gameOver) return;
+
+    const computerChoice = getComputerChoice();
+
+    let resultado = "";
+    if (humanChoice === computerChoice) {
+        resultado = `Empate: ambos eligieron ${humanChoice}`;
+    } else if (
+        (humanChoice === "PIEDRA" && computerChoice === "TIJERA") ||
+        (humanChoice === "PAPEL" && computerChoice === "PIEDRA") ||
+        (humanChoice === "TIJERA" && computerChoice === "PAPEL")
+    ) {
+        humanScore++;
+        resultado = `Ganaste: ${humanChoice} vence a ${computerChoice}`;
+    } else {
+        computerScore++;
+        resultado = `Perdiste: ${computerChoice} vence a ${humanChoice}`;
+    }
+
+    agregarHistorial(resultado);
+    actPuntos();
+    ganador();
+}
+
+btnPiedra.addEventListener("click", () => playRound("PIEDRA"));
+btnPapel.addEventListener("click", () => playRound("PAPEL"));
+btnTijera.addEventListener("click", () => playRound("TIJERA"));
