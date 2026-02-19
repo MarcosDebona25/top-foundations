@@ -6,7 +6,7 @@
 
 body {
   font-family: Georgia, "Times New Roman", Times, serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.6;
   background-color: #fff8f0;
   color: #333;
@@ -69,7 +69,7 @@ main img {
 
 main h2 {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: bold;
   color: #c0392b;
   margin-top: 25px;
@@ -79,7 +79,6 @@ main h2 {
 }
 
 main p {
-  font-size: 16px;
   text-align: justify;
   margin-bottom: 15px;
   padding: 0 10px;
@@ -93,7 +92,6 @@ main ol {
 
 main ul li,
 main ol li {
-  font-size: 16px;
   margin: 8px 0;
   padding: 5px 0;
 }
@@ -117,4 +115,4 @@ footer p {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
   color: #f39c12;
-}
+} 
