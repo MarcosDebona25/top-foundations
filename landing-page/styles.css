@@ -172,6 +172,7 @@ blockquote p {
   padding: 40px;
   border-radius: 10px;
   font-style: italic;
+  text-align: justify;
 }
 
 blockquote footer {
