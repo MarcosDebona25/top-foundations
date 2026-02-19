@@ -5,6 +5,7 @@ let gameOver = false;
 const btnPiedra = document.getElementById("piedra");
 const btnPapel = document.getElementById("papel");
 const btnTijera = document.getElementById("tijera");
+const btnReiniciar = document.getElementById("btn-reiniciar")
 
 const scoreEl = document.getElementById("score");
 const historialEl = document.getElementById("historial");
@@ -24,6 +25,9 @@ function actPuntos() {
 function agregarHistorial(texto) {
     const li = document.createElement("li");
     li.textContent = texto;
+    li.style.padding = "5px";
+    li.style.listStyleType = "none";
+
     historialEl.appendChild(li);
 }
 
@@ -64,6 +68,19 @@ function playRound(humanChoice) {
     ganador();
 }
 
+function reiniciarGame() {
+    humanScore = 0;
+    computerScore = 0;
+    gameOver = false;
+
+    scoreEl.innerHTML = "";
+    historialEl.innerHTML = "";
+    ganadorEl.innerHTML = "";
+
+    actPuntos();
+}
+
 btnPiedra.addEventListener("click", () => playRound("PIEDRA"));
 btnPapel.addEventListener("click", () => playRound("PAPEL"));
 btnTijera.addEventListener("click", () => playRound("TIJERA"));
+btnReiniciar.addEventListener("click", () => reiniciarGame());

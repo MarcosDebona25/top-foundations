@@ -6,25 +6,34 @@
   <meta name="viewport" content="width=1024, initial-scale=1">
   <title>Piedra Papel Tijeras</title>
   <script defer src="./code.js"></script>
+  <link href="style.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
-  <h1>Rock Paper Scissors</h1>
-  <p>Seleccione su opción:</p>
+  <header>
+    <h1>Rock Paper Scissors</h1>
+  </header>
 
-  <div id="buttons-game">
-    <button id="piedra">Piedra</button>
-    <button id="papel">Papel</button>
-    <button id="tijera">Tijera</button>
-  </div>
+  <main>
+    <p>Seleccione su opción</p>
+    <div id="buttons-game">
+      <button id="piedra">Piedra</button>
+      <button id="papel">Papel</button>
+      <button id="tijera">Tijera</button>
+    </div>
 
-  <section id="resultados">
-    <h2>Marcador</h2>
-    <p id="score">Jugador: 0 | Computadora: 0</p>
-    <h3>Historial de rondas</h3>
-    <ul id="historial"></ul>
-    <p id="ganador"></p>
-  </section>
+    <section id="resultados">
+      <h2>Marcador</h2>
+      <p id="score">Jugador: 0 | Computadora: 0</p>
+      <h3>Historial de rondas</h3>
+      <ul id="historial"></ul>
+      <strong>
+        <p id="ganador"></p>
+      </strong>
+    </section>
+
+    <button id="btn-reiniciar">Reiniciar</button>
+  </main>
 </body>
 
 </html>
